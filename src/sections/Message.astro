@@ -1,0 +1,30 @@
+---
+import Gallery from "@/components/Gallery.astro";
+import Divider from "@/components/Divider.astro";
+import Title from "@/components/Title.astro";
+
+const images = [
+  { src: "/photos/novios1.jpg", alt: "Novios sonriendo juntos" },
+  { src: "/photos/novios2.jpg", alt: "Foto romántica de los novios" },
+  { src: "/photos/novios3.jpg", alt: "Novios en la playa" },
+  { src: "/photos/novios4.jpg", alt: "Novios durante un atardecer" },
+  { src: "/photos/novios5.jpg", alt: "Novios durante un atardecer" },
+  { src: "/photos/novios6.jpg", alt: "Novios durante un atardecer" },
+  { src: "/photos/novios7.jpg", alt: "Novios durante un atardecer" }
+];
+---
+
+<section>
+    <div
+        class="max-w-[1140px] phone:w-full phone:px-2 mx-auto mb-12 mt-12 desktop:mb-14 desktop:mt-24 text-color01 flex gap-3 justify-center items-center flex-col"
+    >
+        <Title title="Nuestra Historia" />
+        <span
+            class="font-rubik desktop:text-xl text-center font-extralight text-gray-400"
+        >
+            Capturamos momentos que cuentan nuestra historia
+        </span>
+    </div>
+    <Gallery images={images} />
+    <Divider />
+</section>

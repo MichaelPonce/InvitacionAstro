@@ -1,0 +1,16 @@
+---
+// components/Gallery.astro
+const { images = [] } = Astro.props;
+---
+
+<div class="gallery-container max-w-[1140px] mx-auto flex flex-wrap gap-4 justify-center">
+  {images.map((image, index) => (
+    <img src={image.src} alt={image.alt} class="w-60 h-auto rounded-lg shadow-lg" />
+  ))}
+</div>
+
+<style>
+  .gallery-container img {
+    object-fit: cover;
+  }
+</style>

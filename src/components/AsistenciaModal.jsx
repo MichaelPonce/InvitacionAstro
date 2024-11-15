@@ -1,234 +1,44 @@
+import React from 'react';
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link } from "@nextui-org/react";
-import { Radio, RadioGroup } from "@nextui-org/react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-
-
-export default function AsistenciaModal({ type }) {
-    const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
-    const [error, setError] = useState("");
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
-    const [send, setSend] = useState(false);
-    const [asistenciaCheck, setAsistenciaCheck] = useState("");
-    const handleGuardarForm = handleSubmit(async (data) => {
-        if (asistenciaCheck === "") {
-            setError("Debes seleccionar una opción de asistencia")
-            return
-        }
-        const datos = {
-            ...data,
-            Flag_Asistencia: asistenciaCheck,
-            T_Tipo_Sede: type,
-        }
-
-        const response = await fetch('https://eae-api.pedagogicos.pe/api/asistencia', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer 12|SjaqxYBCTstwlZndGdS7IKUjTW7nKnZRayAVsKzA4fcc3c0c'
-            },
-            body: JSON.stringify(datos)
-
-        })
-        const res = await response.json()
-        if (res.status === 201) {
-            reset()
-            setSend(true)
-            setError("")
-        } else {
-            setError(res.message)
-
-        }
-    })
+export default function AsistenciaModal({ isOpen, onClose }) {
+    if (!isOpen) return null; 
 
     return (
-        <>
-            <button onClick={onOpen} className="w-[280px] desktop:w-[200px] mx-auto  bg-color01 text-color02 py-3 rounded-3xl">Confirmar Asistencia</button>
-            <Modal
-                backdrop={'blur'}
-                isOpen={isOpen}
-                onOpenChange={onOpenChange}
-                placement="center"
-                size='xl'
-                isDismissable={false} isKeyboardDismissDisabled={true}
-                className='p-8'
-            >
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                            <ModalHeader className="flex 
-                            font-parisienne
-                            text-color01
-                            font-light
-                            text-5xl
-                            phone:text-[34px]
-                            p-0
-                            desktop:text-5xl
-                            text-center
-                            my-4
-                            flex-col gap-1">
-                                ¿Asistes a la {type} ?
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-8 rounded-lg max-w-sm w-full text-center">
+                {/* Título del modal */}
+                <h2 className="text-2xl font-semibold mb-4">¿A quién deseas informar?</h2>
 
-                            </ModalHeader>
-                            <ModalBody>
-                                {
-                                    !send ? (<form onSubmit={handleGuardarForm} >
+                {/* Opciones de novios */}
+                <div className="flex justify-around mb-6">
+                    <a 
+                        href="https://api.whatsapp.com/send?phone=50577428248&text=%E2%9C%A8%20%C2%A1Hola%20Joan!%20%E2%9C%A8%0AQueremos%20confirmar%20nuestra%20asistencia%20a%20su%20boda%20%F0%9F%92%8D%F0%9F%8E%89%3A%0AS%C3%AD%2C%20estaremos%20ah%C3%AD%20%F0%9F%A5%B3%E2%9D%A4%EF%B8%8F%20y%20seremos%20%5Bn%C3%BAmero%5D%20invitados.%0A%0AEstamos%20emocionados%20por%20celebrar%20con%20ustedes%20este%20d%C3%ADa%20tan%20especial.%20%F0%9F%8E%B6%0A%F0%9F%92%90%20%C2%A1Nos%20vemos%20pronto!" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center"
+                    >
+                        <img src="/joan.jpg" alt="Joan Foto" className="w-24 h-24 rounded-full mb-2" />
+                        <p className="text-lg font-medium">Joan</p>
+                    </a>
+                    <a 
+                        href="https://api.whatsapp.com/send?phone=50577428248&text=%E2%9C%A8%20%C2%A1Hola%20Beyki!%20%E2%9C%A8%0AQueremos%20confirmar%20nuestra%20asistencia%20a%20su%20boda%20%F0%9F%92%8D%F0%9F%8E%89%3A%0AS%C3%AD%2C%20estaremos%20ah%C3%AD%20%F0%9F%A5%B3%E2%9D%A4%EF%B8%8F%20y%20seremos%20%5Bn%C3%BAmero%5D%20invitados.%0A%0AEstamos%20emocionados%20por%20celebrar%20con%20ustedes%20este%20d%C3%ADa%20tan%20especial.%20%F0%9F%8E%B6%0A%F0%9F%92%90%20%C2%A1Nos%20vemos%20pronto!" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center"
+                    >
+                        <img src="/beyki.jpg" alt="Beyki Foto" className="w-24 h-24 rounded-full mb-2" />
+                        <p className="text-lg font-medium">Beyki</p>
+                    </a>
+                </div>
 
-
-                                        {
-                                            error && (
-                                                <div className="text-center">
-                                                    <span className="text-red-500 text-center text-xs">{error}</span>
-                                                </div>
-                                            )
-                                        }
-
-                                        <div className="text-center mt-4 mb-8" >
-                                            <div className="flex items-center justify-center " >
-
-                                                <RadioGroup
-                                                    {...register('Flag_Asistencia', {
-
-                                                    })}
-                                                    color='warning'
-                                                    size='lg'
-                                                    orientation='horizontal'
-                                                    label=""
-                                                    value={asistenciaCheck}
-                                                    onValueChange={setAsistenciaCheck}
-                                                >
-                                                    <Radio value="SI">¡Sí, confirmo!</Radio>
-                                                    <Radio value="NO">{`No puedo :(`} </Radio>
-                                                </RadioGroup>
-
-                                            </div>
-                                            {
-                                                errors.Flag_Asistencia && (
-                                                    <span className="text-red-500 text-xs">{errors.Flag_Asistencia.message}</span>
-                                                )
-                                            }
-                                        </div>
-                                        <div className="flex flex-col gap-4" >
-                                            <div>
-                                                <Input
-                                                    {...register('T_NroDocumento', {
-                                                        required: {
-                                                            value: true,
-                                                            message: 'Campo es requerido'
-                                                        }
-                                                    })}
-                                                    label="DNI"
-                                                    placeholder="Ingresa tu DNI"
-                                                    variant="bordered"
-                                                />
-                                                {
-                                                    errors.T_NroDocumento && (
-                                                        <span className="text-red-500 text-xs">{errors.T_NroDocumento.message}</span>
-                                                    )
-                                                }
-                                            </div>
-                                            <div>
-                                                <Input
-                                                    {...register('T_ApellidoPaterno', {
-                                                        required: {
-                                                            value: true,
-                                                            message: 'Campo es requerido'
-                                                        }
-                                                    })}
-                                                    label="Apellido Paterno"
-                                                    placeholder="Ingresa tu apellido paterno"
-                                                    variant="bordered"
-                                                />
-                                                {
-                                                    errors.T_ApellidoPaterno && (
-                                                        <span className="text-red-500 text-xs">{errors.T_ApellidoPaterno.message}</span>
-                                                    )
-                                                }
-                                            </div>
-                                            <div>
-                                                <Input
-                                                    {...register('T_ApellidoMaterno', {
-                                                        required: {
-                                                            value: true,
-                                                            message: 'Campo es requerido'
-                                                        }
-                                                    })}
-                                                    label="Apellido Materno"
-                                                    placeholder="Ingresa tu apellido materno"
-                                                    variant="bordered"
-                                                />
-                                                {
-                                                    errors.T_ApellidoMaterno && (
-                                                        <span className="text-red-500 text-xs">{errors.T_ApellidoMaterno.message}</span>
-                                                    )
-                                                }
-                                            </div>
-                                            <div>
-                                                <Input
-                                                    {...register('T_Nombres', {
-                                                        required: {
-                                                            value: true,
-                                                            message: 'Campo es requerido'
-                                                        }
-                                                    })}
-                                                    label="Nombres"
-                                                    placeholder="Ingresa tus nombres"
-                                                    variant="bordered"
-                                                />
-                                                {
-                                                    errors.T_Nombres && (
-                                                        <span className="text-red-500 text-xs">{errors.T_Nombres.message}</span>
-                                                    )
-                                                }
-                                            </div>
-                                            {
-
-
-                                            }
-
-                                            {
-                                                isSubmitting ? (
-                                                    <button disabled className='bg-color01 disabled:bg-color03 text-color02 py-3  w-[280px] mx-auto desktop:w-[200px] rounded-3xl'>
-                                                        Enviando ..
-                                                    </button>
-                                                ) : (
-                                                    <button className='bg-color01 text-color02 py-3  w-[280px] mx-auto desktop:w-[200px] rounded-3xl'>
-                                                        Enviar
-                                                    </button>
-                                                )
-                                            }
-
-                                        </div>
-
-                                    </form>) : (
-                                        <>
-                                            <div className='w-full flex flex-col gap-5 items-center justify-center' >
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-28 text-color01 ">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-                                                </svg>
-                                                <p className='  font-rubik text-center  text-xl ' >
-                                                    ¡Se envió tu respuesta, Gracias!
-                                                </p>
-                                            </div>
-                                            <button
-                                                onClick={() => {
-                                                    reset()
-                                                    onClose()
-                                                    setSend(false)
-                                                }}
-                                                className='bg-color01 mt-5 text-color02 py-3  w-[280px] mx-auto desktop:w-[200px] rounded-3xl'>
-                                                Salir
-                                            </button>
-                                        </>
-                                    )
-                                }
-                            </ModalBody>
-
-                        </>
-                    )}
-                </ModalContent>
-            </Modal >
-        </>
+                {/* Botón para cerrar el modal */}
+                <button
+                    onClick={onClose}
+                    className="bg-gray-400 text-white py-2 px-4 rounded-full hover:bg-gray-600 transition duration-300"
+                >
+                    Cerrar
+                </button>
+            </div>
+        </div>
     );
 }

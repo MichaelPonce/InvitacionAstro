@@ -112,7 +112,7 @@ function TipsModal() {
                                             Transporte:
                                         </span>
 
-                                        <span>Agregar Info.</span>
+                                        <span>Si necesitas transporte de regreso a casa, no dudes en decírnoslo.</span>
                                     </li>
                                 </ul>
 

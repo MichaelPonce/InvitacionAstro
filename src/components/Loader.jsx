@@ -21,7 +21,7 @@ function Loader() {
                         className="flex z-50 fixed top-0 left-0 w-full h-full bg-white  items-center justify-center"
                     >
                         <div className="max-w-lg">
-                            <img className="w-28 h-auto" src="/love-heart.gif" />
+                            <img alt='Love Heart Gif' className="w-28 h-auto" src="/love-heart.gif" />
                         </div>
                     </div>
                 ) : null}

@@ -147,17 +147,6 @@ function TipsModal() {
                                     </li>
 
                                 </ul>
-                                <h3 style={title} >
-                                    Regalos
-                                </h3>
-                                <ul style={list} >
-                                    <li style={li} >
-                                        Tu presencia en nuestro dia especial es el mejor regalo que podriamos pedir.
-                                         Sin embargo, si deseas hacernos un obsequio adicional, agradeceriamos un aporte
-                                         financiero para ayudarnos a empezar nuestra vida juntos. ❤
-
-                                    </li>
-                                </ul>
                                 <div className="flex flex-col gap-1 justify-end items-end " >
 
                                     <span className="font-parisienne text-color01 text-lg font-bold">

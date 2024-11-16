@@ -25,7 +25,7 @@ const ControlMusic = () => {
             <audio ref={audioRef}  loop>
                 <source src="/cancion-fondo.mp3" type="audio/mpeg" />
             </audio>
-            <button className="btn-music m-2 font-medium shadow-md rounded-3xl py-3 px-10 bg-color01 text-white" onClick={handlePlayMusic}>
+            <button role="button" className="btn-music m-2 font-medium shadow-md rounded-3xl py-3 px-10 bg-color01 text-white" onClick={handlePlayMusic}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -44,7 +44,7 @@ const ControlMusic = () => {
                     ></path></svg >
 
             </button>
-            <button className="btn-music m-2 font-medium shadow-md rounded-3xl py-3 px-10 bg-color01 text-white" onClick={handleStop}>
+            <button role="button" className="btn-music m-2 font-medium shadow-md rounded-3xl py-3 px-10 bg-color01 text-white" onClick={handleStop}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
